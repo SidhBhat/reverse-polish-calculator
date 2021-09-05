@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include<ctype.h>
+#include<stdio.h> // for EOF
+#include<ctype.h> // for isdigits , islower
 #include"getch.h"
 #include"revrse_polish_calc.h"
 

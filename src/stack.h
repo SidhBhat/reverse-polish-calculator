@@ -31,6 +31,7 @@ double getpop(void);
 // clear the stack
 void stackclear(void);
 
+//print the stack
 void stackprint(void);
 
 

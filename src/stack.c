@@ -1,7 +1,8 @@
-#include<stdio.h>
-#include<math.h>
-#include<stddef.h>
+#include<stdio.h> // printf
+#include<math.h> // for nan
+#include<stddef.h> // for NULL
 #include"stack.h"
+
 
 static unsigned short stack_pos = 0;
 static double stack[STACK_SIZE];

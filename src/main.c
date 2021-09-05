@@ -1,8 +1,8 @@
 #include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include<sys/ioctl.h>
-#include<unistd.h>
+#include<stdlib.h> // for atof
+#include<math.h> // for mathematical functions
+#include<sys/ioctl.h> // for ioctl ,TIOCGWINSZ
+#include<unistd.h> // for STDOUT_FILENO
 #include"revrse_polish_calc.h"
 
 #define MAX_STR MAXOP
