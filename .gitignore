@@ -1,0 +1,18 @@
+#build files
+*.[oa]
+*.out
+*.so
+#build directory
+build/
+
+#hidden directories and files
+/.*/
+/.*
+!/.gitignore
+
+#kde project file
+*.kdev4
+*.kdev*
+
+#config make files
+/src/*.mk
