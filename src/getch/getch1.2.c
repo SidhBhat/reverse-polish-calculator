@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include"getch.h"
+#include"getch1.2.h"
 
 static int buf = 0;
 
@@ -7,8 +7,6 @@ static int buf = 0;
 int getch(void)
 {
 	if(buf) {
-		if(buf == EOF)
-			return buf;
 		int tmp = buf;
 		return buf = 0,tmp;
 	}
@@ -23,10 +21,4 @@ int ungetch(int ch)
 	if(buf == 0)
 		return buf = ch;
 	return buf;
-}
-
-// clearerrgetch : clear fail state if getch
-void clearerrgetch(void)
-{
-	buf = 0;
 }

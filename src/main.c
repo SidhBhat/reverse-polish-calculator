@@ -36,6 +36,11 @@ int main(void)
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
+	if(w.ws_col < 18) {
+		printf("\x1b[31mERROR \x1b[0m: termianl too small, minimum required width: 18");
+		return 1;
+	}
+
 	putchar('#');
 	for (int i = 0; i < w.ws_col - 2; i++)
 		putchar('-');
@@ -89,12 +94,24 @@ int main(void)
 					push(log10(popw()));
 					break;
 				}
+				else if(my_strcomp(str,"sqrt") == '\0') {
+					push(sqrt(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"cbrt") == '\0') {
+					push(cbrt(popw()));
+					break;
+				}
 				else if(my_strcomp(str,"ans") == '\0') {
 					push(ans);
 					break;
 				}
 				else if(my_strcomp(str,"clear") == '\0') {
 					stackclear();
+					break;
+				}
+				else if(my_strcomp(str,"exit") == '\0') {
+					return 0;
 					break;
 				}
 				else {
@@ -160,6 +177,7 @@ int main(void)
 				popflg = STATE_RESET;
 				varptr = NULL;
 				stackprint();
+				stackclear();
 				ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 				for (int i = 0; i < w.ws_col; i++)
 					putchar('-');
