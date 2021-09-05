@@ -46,6 +46,50 @@ int main(void)
 			case NUMBER:
 				push(atof(str));
 				break;
+			case OPERATOR:
+				if(my_strcomp(str,"sin") == '\0') {
+					push(sin(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"cos") == '\0') {
+					push(cos(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"tan") == '\0') {
+					push(tan(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"sinh") == '\0') {
+					push(sinh(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"cosh") == '\0') {
+					push(cosh(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"tanh") == '\0') {
+					push(tanh(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"pow") == '\0') {
+					oprd = popw();
+					push(pow(popw(), oprd));
+					break;
+				}
+				else if(my_strcomp(str,"ln") == '\0') {
+					push(log(popw()));
+					break;
+				}
+				else if(my_strcomp(str,"log") == '\0') {
+					push(log10(popw()));
+					break;
+				}
+				else {
+					printf("\x1b[31mError \x1b[0m: unknown command \"%s\"\n", str);
+					pop();
+					push(nan(""));
+					break;
+				}
 			case '+':
 				push(popw() + popw());
 				break;
@@ -86,6 +130,8 @@ int main(void)
 				break;
 			default:
 				printf("\x1b[31mError \x1b[0m: unknown command \"%s\"\n", str);
+				pop();
+				push(nan(""));
 				break;
 		}
 

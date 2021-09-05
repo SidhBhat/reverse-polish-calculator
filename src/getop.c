@@ -3,6 +3,8 @@
 #include"getch.h"
 #include"revrse_polish_calc.h"
 
+const char *operators[] = OPLIST;
+
 // getop: function to recognise operators and numbers ,writing number to to string
 int getop(char *const str)
 {
@@ -11,8 +13,20 @@ int getop(char *const str)
 	while((str[0] = ch = getch()) == ' ' || ch == '\t')
 		;
 	str[1] = '\0';
-	if(!isdigit(ch) && ch != '.' && ch != '-')
+	if(!isdigit(ch) && ch != '.' && ch != '-') {
+		if(ch != '\n' && ch != EOF) {
+			int ch; // this ch has no relation to the one above.
+			while((str[++i] = ch = getch()) != ' ' && ch != '\t' && ch != '\n' && ch != EOF)
+				;
+			ungetch(str[i]);
+			str[i] = '\0';
+			if(str[1] != '\0')
+				for(int j = 0; operators[j][0] != '\0'; j++)
+					if(my_strcomp(operators[j], str) == '\0')
+						return OPERATOR;
+		}
 		return ch;
+	}
 	if(ch == '-')
 		if(!isdigit(str[++i] = ch = getch()) && ch != '.') {
 			ungetch(ch);
@@ -34,5 +48,14 @@ int getop(char *const str)
 	if(ch != EOF)
 		ungetch(ch);
 	return NUMBER;
+}
 
+const char my_strcomp(const char *str1, const char *str2)
+{
+	int i;
+
+	for(i = 0; str1[i] != '\0'; i++)
+		if(str1[i] != str2[i])
+			break;
+	return str2[i];
 }
