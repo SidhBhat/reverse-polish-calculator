@@ -159,6 +159,7 @@ int main(void)
 
 				popflg = STATE_RESET;
 				varptr = NULL;
+				stackprint();
 				ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 				for (int i = 0; i < w.ws_col; i++)
 					putchar('-');

@@ -31,5 +31,7 @@ double getpop(void);
 // clear the stack
 void stackclear(void);
 
+void stackprint(void);
+
 
 #endif // STACK_H_INCLUDED

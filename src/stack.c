@@ -56,3 +56,10 @@ void stackclear(void)
 		stack[i] = 0.0;
 	stack_pos = 0;
 }
+
+void stackprint(void)
+{
+	for(int i = 0; i < STACK_SIZE; i++)
+		printf("%10.5f    ", stack[i]);
+	putchar('\n');
+}
