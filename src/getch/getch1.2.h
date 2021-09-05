@@ -15,7 +15,4 @@ int getch(void);
 /* put characters into buffer */
 int ungetch(int ch);
 
-// clearerrgetch : clear fail state if getch
-void clearerrgetch(void);
-
 #endif // GETCH_H_INCLUDED

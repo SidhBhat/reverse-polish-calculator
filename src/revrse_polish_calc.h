@@ -3,7 +3,7 @@
 
 #include"stack.h"
 
-#define OPLIST {"sin","cos","tan","sinh","cosh","tanh","ln","log","pow","ans","clear",""}
+#define OPLIST {"sin","cos","tan","sinh","cosh","tanh","ln","log","pow","sqrt","cbrt","ans","clear","exit",""}
 
 // Compare strings and return the first character in str2 that does not match with str1. Return value of '\0' signals identical strings.
 const char my_strcomp(const char *str1, const char *str2);

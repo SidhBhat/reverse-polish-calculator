@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include"getch.h"
+#include"getch1.3.h"
 
 static int buf = 0;
 
