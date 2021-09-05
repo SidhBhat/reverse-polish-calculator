@@ -15,15 +15,18 @@ int getop(char *const str)
 	str[1] = '\0';
 	if(!isdigit(ch) && ch != '.' && ch != '-') {
 		if(ch != '\n' && ch != EOF) {
-			int ch; // this ch has no relation to the one above.
-			while((str[++i] = ch = getch()) != ' ' && ch != '\t' && ch != '\n' && ch != EOF)
+			int chr; // this ch has no relation to the one above.
+			while((str[++i] = chr = getch()) != ' ' && chr != '\t' && chr != '\n' && chr != EOF)
 				;
 			ungetch(str[i]);
 			str[i] = '\0';
-			if(str[1] != '\0')
+			if(str[1] != '\0') {
 				for(int j = 0; operators[j][0] != '\0'; j++)
 					if(my_strcomp(operators[j], str) == '\0')
 						return OPERATOR;
+			}
+			else if(islower(ch))
+				return VARIBLE;
 		}
 		return ch;
 	}

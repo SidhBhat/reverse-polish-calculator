@@ -26,9 +26,13 @@ double popw(void)
 
 int main(void)
 {
-	int type;
-	double oprd,ans; //temp location for a oparand
+	double oprd, ans, vars[26], *varptr = NULL;
 	char str[MAX_STR];
+	short cycle = 0;
+	int type;
+
+	for(int i = 0; i < 26 ; i++)
+		vars[i] = 0.0;
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 
@@ -41,7 +45,8 @@ int main(void)
 	puts("#");
 
 
-	while((type = getop(str)) != EOF)
+	while((type = getop(str)) != EOF) {
+		(cycle > 0) ? cycle++ : 0;
 		switch(type) {
 			case NUMBER:
 				push(atof(str));
@@ -98,6 +103,14 @@ int main(void)
 					push(nan(""));
 					break;
 				}
+			case VARIBLE:
+				{
+					int tmp = str[0] - 'a';
+					varptr = &vars[tmp];
+					cycle = 1;
+					push(vars[tmp]);
+				}
+				break;
 			case '+':
 				push(popw() + popw());
 				break;
@@ -130,10 +143,22 @@ int main(void)
 			case '?':
 				push(getpop());
 				break;
+			case '=':
+				oprd = popw();
+				popw();
+				if(varptr != NULL && cycle > 2)
+					push(*varptr = oprd);
+				else {
+					printf("\x1b[31mError \x1b[0m: Assignment to non-varible\n");
+					push(oprd);
+				}
+				cycle = 0;
+				break;
 			case '\n':
 				printf("ans =\t%10.8g\n", ans = pop());
 
 				popflg = STATE_RESET;
+				varptr = NULL;
 				ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 				for (int i = 0; i < w.ws_col; i++)
 					putchar('-');
@@ -145,6 +170,7 @@ int main(void)
 				push(nan(""));
 				break;
 		}
+	}
 
 	return 0;
 }

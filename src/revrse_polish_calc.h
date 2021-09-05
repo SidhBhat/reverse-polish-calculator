@@ -14,7 +14,8 @@ int getop(char *const str);
 
 
 #define MAXOP 100      /*max size of operator*/
-#define NUMBER '0'          /*siganl that value is number */
-#define OPERATOR '1'
+#define NUMBER '0'     /*siganl that value is number */
+#define OPERATOR '1'   /*signal for a operator */
+#define VARIBLE '2'    /* signal that the value is a varible */
 
 #endif // REVRSE_POLISH_CALC_H_INCLUDED
