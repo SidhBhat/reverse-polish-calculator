@@ -27,7 +27,7 @@ double popw(void)
 int main(void)
 {
 	int type;
-	double oprd; //temp location for a oparand
+	double oprd,ans; //temp location for a oparand
 	char str[MAX_STR];
 
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
@@ -84,6 +84,14 @@ int main(void)
 					push(log10(popw()));
 					break;
 				}
+				else if(my_strcomp(str,"ans") == '\0') {
+					push(ans);
+					break;
+				}
+				else if(my_strcomp(str,"clear") == '\0') {
+					stackclear();
+					break;
+				}
 				else {
 					printf("\x1b[31mError \x1b[0m: unknown command \"%s\"\n", str);
 					pop();
@@ -119,8 +127,11 @@ int main(void)
 				oprd = popw();
 				push(pow(pop(), oprd));
 				break;
+			case '?':
+				push(getpop());
+				break;
 			case '\n':
-				printf("ans =\t%10.8g\n", pop());
+				printf("ans =\t%10.8g\n", ans = pop());
 
 				popflg = STATE_RESET;
 				ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);

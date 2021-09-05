@@ -3,7 +3,7 @@
 #include"getch.h"
 #include"revrse_polish_calc.h"
 
-const char *operators[] = OPLIST;
+static const char *operators[] = OPLIST;
 
 // getop: function to recognise operators and numbers ,writing number to to string
 int getop(char *const str)
@@ -50,6 +50,7 @@ int getop(char *const str)
 	return NUMBER;
 }
 
+// Compare strings and return the first character in str2 that does not match with str1. Return value of '\0' signals indntical strings.
 const char my_strcomp(const char *str1, const char *str2)
 {
 	int i;

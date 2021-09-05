@@ -3,10 +3,9 @@
 
 #include"stack.h"
 
-#define OPLIST {"sin","cos","tan","sinh","cosh","tanh","ln","log","pow",""}
+#define OPLIST {"sin","cos","tan","sinh","cosh","tanh","ln","log","pow","ans","clear",""}
 
-extern const char *operators[];
-
+// Compare strings and return the first character in str2 that does not match with str1. Return value of '\0' signals identical strings.
 const char my_strcomp(const char *str1, const char *str2);
 
 // getop: function to recognise operators and numbers ,writing number to to string

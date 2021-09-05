@@ -32,3 +32,26 @@ double pop(void)
 	}
 }
 /* Returns NaN if stack is empty */
+
+// getval : fetches the value in stack at address, a number between 1-STACK_SIZE
+double getval(unsigned short address)
+{
+	return (address > STACK_SIZE) ? stack[STACK_SIZE -1] : stack[((address < 1) ? 1 : address) - 1];
+}
+/* If address is greater then the stack value, then the topmost value is returned
+ * IF address is lesser or equal to zero the the first value is returned
+ */
+
+// getpop : pop the value at the current stack position without modifying the stack position
+double getpop()
+{
+	return (stack_pos > 0) ? stack[stack_pos - 1] : nan("");
+}
+
+// clear the stack
+void stackclear(void)
+{
+	for(int i = 0; i < STACK_SIZE; i++)
+		stack[i] = 0.0;
+	stack_pos = 0;
+}

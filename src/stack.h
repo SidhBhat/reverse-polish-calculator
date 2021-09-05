@@ -19,5 +19,17 @@ double const *push(double val);
 double pop(void);
 /* Returns NaN if stack is empty */
 
+// getval : fetches the value in stack at address, a number between 1-STACK_SIZE
+double getval(unsigned short address);
+/* If address is greater then the stack value, then the topmost value is returned
+ * IF address is lesser or equal to zero the the first value is returned
+ */
+
+// getpop : pop the value at the current stack position without modifying the stack position
+double getpop(void);
+
+// clear the stack
+void stackclear(void);
+
 
 #endif // STACK_H_INCLUDED
