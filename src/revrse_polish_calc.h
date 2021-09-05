@@ -2,7 +2,6 @@
 #define REVRSE_POLISH_CALC_H_INCLUDED
 
 #include"stack.h"
-#include"getch.h"
 
 // getop: function to recognise operators and numbers ,writing number to to string
 int getop(char *const str);

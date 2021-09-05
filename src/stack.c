@@ -10,7 +10,7 @@ double const *push(double val)
 {
 	if(stack_pos < STACK_SIZE) {
 		stack[stack_pos++] = val;
-		return &stack[stack_pos];
+		return &stack[stack_pos - 1];
 	}
 	stack_pos = 0;
 	stack[stack_pos++] = val;

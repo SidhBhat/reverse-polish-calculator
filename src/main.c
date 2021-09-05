@@ -6,8 +6,23 @@
 #include"revrse_polish_calc.h"
 
 #define MAX_STR MAXOP
+#define STATE_FAIL 1
+#define STATE_SUCCESS 0
+#define STATE_RESET STATE_SUCCESS
 
+static short popflg = STATE_RESET;
 struct winsize w;
+
+double popw(void)
+{
+	double val = pop();
+
+	if((isnan(val) ? 1 : (popflg = STATE_SUCCESS, 0)) && popflg == STATE_SUCCESS) {
+		printf("\x1b[31mError \x1b[0m: an empty stack event detected, please supply sufficient arguments\n");
+		popflg = STATE_FAIL;
+	}
+	return val;
+}
 
 int main(void)
 {
@@ -23,7 +38,7 @@ int main(void)
 	printf("#\nReverse Polish Calculator\n#");
 	for (int i = 0; i < w.ws_col - 2; i++)
 		putchar('-');
-	putchar('#');
+	puts("#");
 
 
 	while((type = getop(str)) != EOF)
@@ -32,28 +47,38 @@ int main(void)
 				push(atof(str));
 				break;
 			case '+':
-				push(pop() + pop());
+				push(popw() + popw());
 				break;
 			case '*':
-				push(pop() * pop());
+				push(popw() * popw());
 				break;
 			case '-':
-				oprd = pop();
-				push(pop() - oprd);
+				oprd = popw();
+				push(popw() - oprd);
 				break;
 			case '/':
-				oprd = pop();
+				oprd = popw();
 				if(oprd == 0.0) {
 					printf("\x1b[31mError \x1b[0m: Division by zero\n");
 					push(INFINITY);
 				}
 				else
-					push(pop() / oprd);
+					push(popw() / oprd);
+				break;
+			case '%':
+				oprd = popw();
+				if(oprd == 0.0)
+					printf("\x1b[31mError \x1b[0m: Division by zero\n");
+				push(fmod(popw(), oprd));
+				break;
+			case '^':
+				oprd = popw();
+				push(pow(pop(), oprd));
 				break;
 			case '\n':
-				if(isnan(oprd = pop()))
-					printf("\x1b[31mError \x1b[0m: an empty stack event detected\n");
-				printf("ans =\t%10.8g\n", oprd);
+				printf("ans =\t%10.8g\n", pop());
+
+				popflg = STATE_RESET;
 				ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
 				for (int i = 0; i < w.ws_col; i++)
 					putchar('-');
