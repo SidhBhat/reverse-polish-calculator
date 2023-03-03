@@ -103,7 +103,7 @@ second argument. We can use this fact to perform assignments (multiple in a sing
 a 1 sin 2 ^ = b 1 cos 2 ^ = +
 ```
 
-would evalute to $1$ as well as assign $ a = sin^2 (1) $ and $ b = cos^2 (1) $. Thus if we run ` a b +` now we would again
+would evalute to $1$ as well as assign $a = sin^2 (1)$ and $b = cos^2 (1)$. Thus if we run ` a b +` now we would again
 get  $1$, which is cool.
 
 ## Variables
