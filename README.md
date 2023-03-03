@@ -109,7 +109,13 @@ get  $1$, which is cool.
 ## Variables
 
 We have 26 variables which can hold values. These are the english small alphabets. We can assign values to these variables
-using the `=` operator. 
+using the `=` operator.
+
+## Develpoment Branch
+
+The branch `beta` is used for devlopment purposes. When you build here the program prints the stack along with the answer.
+This is used for debugging purpose. If you use this branch please make sure to remove the relevant lines when merging into
+main.
 
 ## Contributing
 
